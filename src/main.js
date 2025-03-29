@@ -1,24 +1,20 @@
-import './style.css'
-import javascriptLogo from './javascript.svg'
-import viteLogo from '/vite.svg'
-import { setupCounter } from './counter.js'
+import { addRoute, navigateTo } from './router.js';
+import './style.css';
 
-document.querySelector('#app').innerHTML = `
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="${viteLogo}" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">
-      <img src="${javascriptLogo}" class="logo vanilla" alt="JavaScript logo" />
-    </a>
-    <h1 class="text-3xl font-bold underline text-red-600">Hello Vite!</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite logo to learn more
-    </p>
-  </div>
-`
+const pages = import.meta.glob('/src/pages/**/*.html');
 
-setupCounter(document.querySelector('#counter'))
+for (const path in pages) {
+  let routePath = path.replace('/src/pages', '').replace('.html', '');
+  if (routePath.endsWith('/index')) {
+    routePath = routePath.replace('/index', '');
+  }
+  addRoute(routePath === '' ? '/' : routePath, path);
+}
+
+const notFoundHandler = () => {
+  document.querySelector('#app').innerHTML = '<h1>404</h1><p>Page not found.</p>';
+};
+
+addRoute('/404', notFoundHandler);
+
+navigateTo(window.location.pathname);
