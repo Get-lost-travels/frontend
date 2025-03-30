@@ -28,11 +28,11 @@ const handleLocation = async () => {
         scripts.forEach((script) => {
             const newScript = document.createElement('script');
 
-            newScript.src = script.src;
-            newScript.type = script.type;
-            newScript.async = script.async;
-            newScript.defer = script.defer;
-            newScript.text = script.text;
+            Array.from(script.attributes).forEach(attr => {
+                newScript.setAttribute(attr.name, attr.value);
+            });
+
+            newScript.textContent = script.textContent;
 
             script.replaceWith(newScript);
         });
