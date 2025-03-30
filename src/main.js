@@ -1,4 +1,4 @@
-import { addRoute, navigateTo } from './router.js';
+import { addRoute } from './router.js';
 import './style.css';
 
 const pages = import.meta.glob('/src/pages/**/*.html');
@@ -16,5 +16,3 @@ const notFoundHandler = () => {
 };
 
 addRoute('/404', notFoundHandler);
-
-navigateTo(window.location.pathname);
