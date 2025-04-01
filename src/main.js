@@ -1,5 +1,4 @@
 import { addRoute } from './router.js';
-import './style.css';
 
 const pages = import.meta.glob('/src/pages/**/*.html');
 
