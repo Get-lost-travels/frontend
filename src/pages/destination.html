@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <title>Destination</title>
 </head>
-<body>
-
+<body class="bg-blue-600">
     <script src="src/javascript/destination.js"> </script>
+
     <div class="navbar pb-10">
-        <nav class="bg-[#227B94] text-xl flex pl-50 gap-x-5">
-            <a class="bg-[#16325B] border-b-1" href=""> Home </a>
+        <nav class="bg-[#227B94] text-accent text-xl flex pl-50 gap-x-5">
+            <a class="bg-background-0 border-b-1" href=""> Home </a>
             <a class="bg-[#16325B] border-b-1" href=""> Explore </a>
             <a class="bg-[#16325B] border-b-1" href=""> Sign up </a>
         </nav>
@@ -59,14 +59,14 @@
             </p>
         </div >
 
-        <div class="tickets_price text-left  border-5 border-[#227B94] rounded-2xl w-[762px] h-[800px] px-5  py-5 text-2xl">
+        <div class="tickets_price text-left  border-5 border-[#227B94] rounded-2xl w-[762px] h-[800px] px-5 py-5 text-2xl">
             <p class="text-[#FFDC7F]"> Tickets and price: </p>
 
-            <div class="flex items-center gap-20">
+            <div class="flex items-center gap-10">
                 <img src="/images/calendar.png" alt="calendar" width="417" height="437">
 
                 <div class="relative">
-                    <div class="flex flex-col gap-4 py-5 absolute bottom-20 w-40">
+                    <div class="flex flex-col gap-4 py-5 absolute px-- bottom-20 w-40">
                         <p class="text-[#FFDC7F]"> Select time: </p>
                         <button class="bg-[#227B94] w-24 px-5 rounded-2xl hover:bg-[#2E9CC0] focus:outline-none focus:ring-2 focus:ring-white"> 12:00 </button>
                         <button class="bg-[#227B94] w-24 px-5 rounded-2xl hover:bg-[#2E9CC0] focus:outline-none focus:ring-2 focus:ring-white"> 14:00 </button>
@@ -82,14 +82,8 @@
                 <button class="hover:text-[#FFDC7F]" id="btn_plus" onclick="plusFcn()"> + </button>
             </div>
 
-            <!--<div class="flex justify-between  items-center bg-[#227B94] px-5 rounded-2xl w-24 h-8.5">
-                <button class="hover:text-[#FFDC7F]" id="btn_minus"> − </button>
-                <span id="nr"> 0 </span>
-                <button class="hover:text-[#FFDC7F]" id="btn_plus"> + </button>
-            </div>-->
             <p> Total: </p>
         </div>
     </div>
-
 </body>
 </html>
