@@ -1,53 +1,73 @@
-const routes = {};
+const app = document.getElementById('app');
 
-// Helper function to normalize paths (remove trailing slashes)
-const normalizePath = (path) => {
-    return path.endsWith('/') && path !== '/' ? path.slice(0, -1) : path;
-};
+const routes = new Map();
 
-export const addRoute = (path, handler) => {
-    routes[normalizePath(path)] = handler;
-};
+export function addRoute(path, handler) {
+    routes.set(path, handler);
+}
 
-export const navigateTo = (path) => {
-    history.pushState(null, null, path);
-    handleLocation();
-};
+/*
+ * Page loading functions
+ */
 
-const handleLocation = async () => {
-    const path = normalizePath(window.location.pathname);
-    const handler = routes[path] || routes['/404'];
-    if (typeof handler === 'function') {
-        handler();
-    } else if (typeof handler === 'string') {
-        const response = await fetch(handler);
-        document.querySelector('#app').innerHTML = await response.text();
-
-        // Load scripts
-        const scripts = document.querySelectorAll('script');
-        scripts.forEach((script) => {
-            const newScript = document.createElement('script');
-
-            Array.from(script.attributes).forEach(attr => {
-                newScript.setAttribute(attr.name, attr.value);
-            });
-
-            newScript.textContent = script.textContent;
-
-            script.replaceWith(newScript);
-        });
+async function loadPage(pagePath) {
+    try {
+        const response = await fetch(pagePath);
+        const html = await response.text();
+        app.innerHTML = html;
+    } catch (error) {
+        console.error(`Error loading page ${pagePath}:`, error);
+        notFoundHandler();
     }
-};
+}
 
-window.onpopstate = handleLocation;
-window.route = navigateTo;
+async function loadHomePage() {
+    await loadPage('/src/pages/index.html');
+}
 
-document.addEventListener('DOMContentLoaded', () => {
-    document.body.addEventListener('click', (e) => {
-        if (e.target.matches('[data-link]')) {
-            e.preventDefault();
-            navigateTo(e.target.href);
-        }
-    });
-    handleLocation();
+async function loadRegisterPage() {
+    await loadPage('/src/pages/register/index.html');
+    const { initializeRegister } = await import('./pages/register/register.js');
+    initializeRegister();
+}
+
+async function loadLoginPage() {
+    await loadPage('/src/pages/login/index.html');
+    const { initializeLogin } = await import('./pages/login/login.js');
+    initializeLogin();
+}
+
+
+/*
+ * Router registration 
+ */
+
+addRoute('/', loadHomePage);
+addRoute('/register', loadRegisterPage);
+addRoute('/login', loadLoginPage);
+
+
+/*
+ * Router event listeners
+ */
+
+export function initRouter() {
+    const path = window.location.pathname;
+    const handler = routes.get(path) || routes.get('/404');
+    
+    if (handler) {
+        handler();
+    }
+}
+
+export function notFoundHandler() {
+    app.innerHTML = '<h1>404 - Page Not Found</h1>';
+}
+
+window.addEventListener('popstate', () => {
+    const path = window.location.pathname;
+    const handler = routes.get(path) || routes.get('/404');
+    if (handler) {
+        handler();
+    }
 });
