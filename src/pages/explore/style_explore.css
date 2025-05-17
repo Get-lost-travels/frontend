@@ -1,0 +1,318 @@
+
+:root {
+    --bg-main: #16325B;
+    --bg-secondary: #227B94;
+    --text-color: #78B7D0;
+    --accent: #FFDC7F;
+    --white: #ffffff;
+}
+  
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+  
+body {
+    font-family: Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-main);
+    color: var(--text-color);
+}
+
+/*--- NAVBAR SECTION ---*/
+
+.navbar {
+    background-color: var(--bg-secondary); 
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 80px; 
+    position: relative;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3); 
+}
+  
+.navbar-logo {
+    height: 70px;
+    width: auto;
+    margin-left: 1rem;
+}
+  
+.navbar-links {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+  
+.navbar a {
+    color: var(--text-color);
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 0.3rem;
+    font-weight: bold;
+    transition: background 0.3s, color 0.3s;
+}
+  
+.navbar a.active {
+    background-color: var(--accent);
+    color: var(--bg-main);
+}
+  
+.navbar a:hover {
+    background-color: var(--accent);
+    color: var(--bg-main);
+}
+
+/* SEARCH SECTION */
+
+.search-section {
+    background-color: var(--bg-main);
+    padding: 30px;
+    text-align: center;
+}
+
+.search-box-container {
+    background-color: var(--bg-secondary);
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.search-box-container h2 {
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+}
+
+
+.search-box {
+    background-color: var(--bg-main);
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column; 
+    gap: 10px;
+    align-items: center;
+}
+  
+.search-box input,
+.search-box select,
+.search-box button {
+    width: 100%;
+    max-width: 400px;
+    padding: 10px;
+    border-radius: 4px;
+    border: none;
+}
+  
+  
+.btn-search {
+    padding: 10px 20px;
+    background-color: var(--accent);
+    border: none;
+    color: var(--bg-main);
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.search-card {
+    background-color: var(--bg-secondary);
+    border-radius: 12px;
+    padding: 30px;
+    max-width: 400px;
+    margin: 2rem auto;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/*--- RECOMENDATIONS SECTION ---*/
+
+.explore-romania {
+  padding: 3rem 2rem;
+  text-align: center;
+  background-color: var(--bg-main);
+}
+
+.explore-romania h2 {
+  color: var(--accent);
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.explore-romania .subtitle {
+  color: var(--text-color);
+  margin-bottom: 2rem;
+}
+
+.location-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.city-card {
+  background-color: var(--bg-secondary);
+  border-radius: 10px;
+  overflow: hidden;
+  width: 200px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  transition: transform 0.2s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.city-card:hover {
+  transform: scale(1.05);
+}
+
+.city-card img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  display: block;
+}
+
+.city-card span {
+  display: block;
+  padding: 0.8rem 0 0.5rem;
+  color: var(--text-color);
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.city-btn {
+  margin-bottom: 1rem;
+  padding: 6px 14px;
+  background-color: var(--accent);
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  color: var(--bg-main);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.city-btn:hover {
+  background-color: #f0c95d;
+}
+
+
+
+
+/*--- FOOTER ---*/
+
+.footer {
+    background-color: var(--bg-main);
+    padding: 2rem 1rem 1rem 1rem;
+    margin-top: 3rem;
+    color: var(--text-color);
+    font-size: 0.9rem;
+    display: flex;
+    justify-content: center;
+}
+
+.footer .box-container {
+    border-top: 1px solid var(--accent); 
+    padding-top: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 2rem;
+    max-width: 1200px;
+    width: 100%;
+}
+
+
+.footer .box h3 {
+    font-size: 1.2rem;
+    color: var(--accent);
+    margin-bottom: 1rem;
+}
+
+.footer .box a {
+    color: var(--text-color);
+    text-decoration: none;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.footer .box a:hover {
+    text-decoration: underline;
+}
+
+.footer .box a i {
+    margin-right: 0.5rem;
+    color: var(--accent);
+}
+
+
+/*--- RESPONSIVE STYLES ---*/
+
+@media (max-width: 768px) {
+    .reviews .box-container,
+    .footer .box-container {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .home .slide .content {
+      width: 100%;
+    }
+
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .navbar-links {
+        position: static;
+        transform: none;
+        margin-top: 1rem;
+    }
+}
+
+/*--- PERSON & ROOM SELECTORS ---*/
+
+.selector-group {
+    margin-top: 10px;
+    text-align: left;
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+}
+  
+.selector-group label {
+    color: var(--text-color);
+    display: block;
+    margin-bottom: 5px;
+    font-size: 1rem;
+}
+  
+.counter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+  
+.counter button {
+    background-color: var(--accent);
+    border: none;
+    border-radius: 5px;
+    width: 30px;
+    height: 30px;
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--bg-main);
+    cursor: pointer;
+}
+  
