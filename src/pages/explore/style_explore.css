@@ -1,4 +1,7 @@
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 :root {
     --bg-main: #16325B;
     --bg-secondary: #227B94;
@@ -314,5 +317,9 @@ body {
     font-weight: bold;
     color: var(--bg-main);
     cursor: pointer;
+<<<<<<< Updated upstream
 }
   
+=======
+}
+>>>>>>> Stashed changes
