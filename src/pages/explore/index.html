@@ -1,0 +1,112 @@
+<div class="container mx-auto p-4 mt-8">
+  <!-- Guaranteed side-by-side layout -->
+  <div class="flex flex-row gap-8" style="display: block; display: flex !important; flex-direction: column; flex-direction: row !important;">
+    <!-- Left sidebar - filters (1/4 width) -->
+    <div class="w-1/4" style="width: 25% !important; flex: 0 0 25% !important;">
+      <div class="bg-white rounded shadow p-4 mb-8 md:mb-0">
+        <h2 class="text-xl font-semibold mb-4">Filters</h2>
+        <form id="exploreFilters" class="space-y-4">
+          <!-- Price Range -->
+          <div>
+            <label class="block font-medium mb-2">Price Range ($)</label>
+            <div class="flex items-center gap-2">
+              <input type="number" id="minPrice" name="minPrice" min="0" value="0" class="w-16 p-1 border rounded text-sm" />
+              <span class="text-sm">to</span>
+              <input type="number" id="maxPrice" name="maxPrice" min="0" value="1000" class="w-16 p-1 border rounded text-sm" />
+            </div>
+          </div>
+          
+          <!-- Location Search (separate row) -->
+          <div>
+            <label class="block font-medium mb-2" for="location">Location</label>
+            <input name="location" id="location" type="text" placeholder="Search location..." class="w-full p-2 border rounded" />
+          </div>
+          
+          <!-- Duration Picker (separate row) -->
+          <div>
+            <label class="block font-medium mb-2" for="duration">Duration (days)</label>
+            <input name="duration" id="duration" type="number" min="1" class="w-full p-2 border rounded" />
+          </div>
+          
+          <!-- Apply button - smaller and right-aligned -->
+          <div class="flex justify-end mt-4">
+            <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-6 rounded text-sm">
+              Apply Filters
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    
+    <!-- Right side - results (3/4 width) -->
+    <div class="w-3/4" style="width: 75% !important; flex: 1 1 auto !important;">
+      <h1 class="text-2xl font-bold mb-4">Explore Services</h1>
+      <div id="exploreResults" class="mb-6"></div>
+      <div id="explorePagination" class="flex flex-wrap gap-2"></div>
+    </div>
+  </div>
+</div>
+
+<script type="module">
+import { initializeExplore } from './explore.js';
+
+function setupPriceInputs() {
+  const minInput = document.getElementById('minPrice');
+  const maxInput = document.getElementById('maxPrice');
+  
+  minInput.addEventListener('change', () => {
+    if (parseInt(minInput.value) > parseInt(maxInput.value)) {
+      minInput.value = maxInput.value;
+    }
+    triggerFormSubmit();
+  });
+  
+  maxInput.addEventListener('change', () => {
+    if (parseInt(maxInput.value) < parseInt(minInput.value)) {
+      maxInput.value = minInput.value;
+    }
+    triggerFormSubmit();
+  });
+}
+
+function triggerFormSubmit() {
+  document.getElementById('exploreFilters').dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
+}
+
+// Setup the form submission
+document.getElementById('exploreFilters').addEventListener('submit', function(e) {
+  e.preventDefault();
+  if (window._loadServicesPage) {
+    window._loadServicesPage(1);
+  }
+});
+
+// Make the loadServices function available to the window for the initializeExplore module
+window._loadServicesPage = (page) => {
+  console.log('Loading services page', page);
+  const form = document.getElementById('exploreFilters');
+  const formData = new FormData(form);
+  
+  // Get all form values
+  const params = Object.fromEntries(formData.entries());
+  params.page = page;
+  params.pageSize = 10;
+  console.log('Filter params:', params);
+  
+  // This function should be available after initializeExplore() is called
+  if (window._exploreLoadServices) {
+    window._exploreLoadServices(page);
+  }
+};
+
+// Initialize everything when DOM is ready
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', () => {
+    setupPriceInputs();
+    initializeExplore();
+  });
+} else {
+  setupPriceInputs();
+  initializeExplore();
+}
+</script>

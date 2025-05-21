@@ -21,10 +21,12 @@ export const login = async (email, password) => {
             email,
             password
         });
-        
+
         if (response.data.user) {
             StorageService.setUser(response.data.user);
         }
+
+        StorageService.setToken(response.data.token);
         
         return response.data;
     } catch (error) {
@@ -34,11 +36,7 @@ export const login = async (email, password) => {
 };
 
 export const logout = async () => {
-    try {
-        await ApiService.api.post('/auth/logout');
-    } finally {
-        StorageService.clearSession();
-    }
+    StorageService.clearSession();
 };
 
 export const isAuthenticated = () => {

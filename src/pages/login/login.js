@@ -40,13 +40,11 @@ export function initializeLogin() {
                     throw new Error('Please fill in all fields');
                 }
 
-                console.log("Making API call to login...");
-                const response = await login(email, password);
+                await login(email, password);
+
                 console.log("Login successful!");
-                
-                alert('Login successful!');
-                
-                window.history.pushState({}, '', '/');
+
+                window.history.pushState({}, '', '/explore');
                 window.dispatchEvent(new Event('popstate'));
 
             } catch (error) {
