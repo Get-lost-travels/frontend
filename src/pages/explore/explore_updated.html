@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ro">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Explore | Get Lost Travels</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  </head>
+  <body class="bg-[#16325B] text-[#78B7D0] font-[Tahoma]">
+    <div class="bg-[#227B94] shadow-md">
+    <nav class="relative flex items-center justify-between h-16 px-6">
+      <img src="/src/pages/agency_profile/images/logo.png" alt="Get Lost Travels Logo" class="h-16 w-auto" />
+      <div class="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 flex gap-6 items-center">
+        <a href="src/pages/homepage/homepage_updated.html" class="text-[#78B7D0] font-bold px-3 py-1 rounded transition hover:bg-[#FFDC7F] hover:text-[#16325B]">Home</a>
+        <a href="src/pages/explore/explore_updated.html" class="text-[#78B7D0] font-bold px-3 py-1 rounded transition hover:bg-[#FFDC7F] hover:text-[#16325B]">Explore</a>
+        <a href="/src/pages/auth/login.html" class="text-[#78B7D0] font-bold px-3 py-1 rounded transition hover:bg-[#FFDC7F] hover:text-[#16325B]">Sign up</a>
+      </div>
+    </nav>
+  </div>
+
+    <!-- SEARCH SECTION -->
+    <section class="py-8 text-center">
+      <div class="bg-[#227B94] rounded-xl p-8 max-w-md mx-auto shadow-lg flex flex-col gap-6">
+        <input type="text" placeholder="Search location" class="p-2 rounded w-full" />
+        <input type="date" class="p-2 rounded w-full" />
+        <input type="date" class="p-2 rounded w-full" />
+
+        <!-- CAMERE -->
+        <div class="text-left">
+          <label for="nrRooms" class="block mb-1">Rooms:</label>
+          <div class="flex justify-center items-center gap-4">
+            <button onclick="minusRooms()" class="bg-[#FFDC7F] text-[#16325B] w-8 h-8 rounded font-bold">−</button>
+            <span id="nrRooms">1</span>
+            <button onclick="plusRooms()" class="bg-[#FFDC7F] text-[#16325B] w-8 h-8 rounded font-bold">+</button>
+          </div>
+        </div>
+
+        <!-- ADULȚI -->
+        <div class="text-left">
+          <label for="nr" class="block mb-1">Adults:</label>
+          <div class="flex justify-center items-center gap-4">
+            <button onclick="minusFcn()" class="bg-[#FFDC7F] text-[#16325B] w-8 h-8 rounded font-bold">−</button>
+            <span id="nr">1</span>
+            <button onclick="plusFcn()" class="bg-[#FFDC7F] text-[#16325B] w-8 h-8 rounded font-bold">+</button>
+          </div>
+        </div>
+
+        <!-- COPII -->
+        <div class="text-left">
+          <label for="nrChildren" class="block mb-1">Kids:</label>
+          <div class="flex justify-center items-center gap-4">
+            <button onclick="minusChildren()" class="bg-[#FFDC7F] text-[#16325B] w-8 h-8 rounded font-bold">−</button>
+            <span id="nrChildren">0</span>
+            <button onclick="plusChildren()" class="bg-[#FFDC7F] text-[#16325B] w-8 h-8 rounded font-bold">+</button>
+          </div>
+        </div>
+
+        <button class="bg-[#FFDC7F] text-[#16325B] font-bold py-2 px-4 rounded">Căutare</button>
+      </div>
+    </section>
+
+    <!-- RECOMMENDATIONS -->
+    <section class="py-12 bg-[#16325B] text-center">
+      <h2 class="text-[#FFDC7F] text-2xl mb-2">Explore Romania</h2>
+      <p class="mb-8">Popular destinations in Romania</p>
+      <div class="flex flex-wrap justify-center gap-6">
+        <div class="bg-[#227B94] rounded-lg w-52 shadow-lg hover:scale-105 transition-transform">
+          <img src="/src/pages/explore/images/bucuresti.jpg" alt="București" class="w-full h-36 object-cover" />
+          <span class="block py-2 font-bold">București</span>
+          <button class="mb-4 bg-[#FFDC7F] text-[#16325B] font-bold py-1 px-4 rounded">Vezi oferte</button>
+        </div>
+        <div class="bg-[#227B94] rounded-lg w-52 shadow-lg hover:scale-105 transition-transform">
+          <img src="/src/pages/explore/images/brasov.jpg" alt="Brașov" class="w-full h-36 object-cover" />
+          <span class="block py-2 font-bold">Brașov</span>
+          <button class="mb-4 bg-[#FFDC7F] text-[#16325B] font-bold py-1 px-4 rounded">Vezi oferte</button>
+        </div>
+        <div class="bg-[#227B94] rounded-lg w-52 shadow-lg hover:scale-105 transition-transform">
+          <img src="/src/pages/explore/images/cluj.jpg" alt="Cluj-Napoca" class="w-full h-36 object-cover" />
+          <span class="block py-2 font-bold">Cluj-Napoca</span>
+          <button class="mb-4 bg-[#FFDC7F] text-[#16325B] font-bold py-1 px-4 rounded">Vezi oferte</button>
+        </div>
+        <div class="bg-[#227B94] rounded-lg w-52 shadow-lg hover:scale-105 transition-transform">
+          <img src="/src/pages/explore/images/iasi.jpg" alt="Iași" class="w-full h-36 object-cover" />
+          <span class="block py-2 font-bold">Iași</span>
+          <button class="mb-4 bg-[#FFDC7F] text-[#16325B] font-bold py-1 px-4 rounded">Vezi oferte</button>
+        </div>
+        <div class="bg-[#227B94] rounded-lg w-52 shadow-lg hover:scale-105 transition-transform">
+          <img src="/src/pages/explore/images/timisoara.jpg" alt="Timișoara" class="w-full h-36 object-cover" />
+          <span class="block py-2 font-bold">Timișoara</span>
+          <button class="mb-4 bg-[#FFDC7F] text-[#16325B] font-bold py-1 px-4 rounded">Vezi oferte</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <section class="bg-[#16325B] mt-12 text-sm text-[#78B7D0]">
+      <div class="border-t border-[#FFDC7F] py-8 flex flex-wrap justify-around max-w-6xl mx-auto gap-8">
+        <div>
+          <h3 class="text-[#FFDC7F] text-lg mb-4">Menu</h3>
+          <a href="/src/pages/homepage/homepage_updated.html" class="block mb-2"><i class="fas fa-angle-right text-[#FFDC7F] mr-2"></i> Home</a>
+          <a href="/src/pages/auth/login.html" class="block mb-2"><i class="fas fa-angle-right text-[#FFDC7F] mr-2"></i> Explore</a>
+          <a href="/src/pages/auth/login.html" class="block mb-2"><i class="fas fa-angle-right text-[#FFDC7F] mr-2"></i> Sign Up</a>
+          <a href="#" class="block mb-2"><i class="fas fa-angle-right text-[#FFDC7F] mr-2"></i> Contact</a>
+        </div>
+        <div>
+          <h3 class="text-[#FFDC7F] text-lg mb-4">Contact info</h3>
+          <a href="#" class="block mb-2"><i class="fas fa-phone text-[#FFDC7F] mr-2"></i> +40 768 365 409 </a>
+          <a href="#" class="block mb-2"><i class="fas fa-envelope text-[#FFDC7F] mr-2"></i> hello@getlosttravels.com </a>
+          <a href="#" class="block mb-2"><i class="fas fa-map text-[#FFDC7F] mr-2"></i> Cluj-Napoca, Romania </a>
+        </div>
+        <div>
+          <h3 class="text-[#FFDC7F] text-lg mb-4">Follow us</h3>
+          <a href="#" class="block mb-2"><i class="fab fa-facebook-f text-[#FFDC7F] mr-2"></i> Facebook</a>
+          <a href="#" class="block mb-2"><i class="fab fa-instagram text-[#FFDC7F] mr-2"></i> Instagram</a>
+        </div>
+      </div>
+    </section>
+
+    <script src="/src/javascript/person_controls.js"></script>
+  </body>
+</html>
