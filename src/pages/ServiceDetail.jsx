@@ -2,6 +2,8 @@ import { h } from 'preact';
 import { useState, useEffect, useRef } from 'preact/hooks';
 import { Link } from 'preact-router';
 import { getServiceById, getServiceReviews } from '../api/services';
+import BookingForm from '../components/BookingForm';
+import BookingConfirmation from '../components/BookingConfirmation';
 
 const ServiceDetail = (props) => {
   const { id } = props;
@@ -14,6 +16,8 @@ const ServiceDetail = (props) => {
   const [reviewRating, setReviewRating] = useState(0);
   const [reviewComment, setReviewComment] = useState('');
   const [reviewSubmitting, setReviewSubmitting] = useState(false);
+  const [booking, setBooking] = useState(null);
+  const [showBookingConfirmation, setShowBookingConfirmation] = useState(false);
   const modalRef = useRef(null);
 
   useEffect(() => {
@@ -126,6 +130,15 @@ const ServiceDetail = (props) => {
     setShowReviewModal(false);
     setReviewRating(0);
     setReviewComment('');
+  };
+  
+  const handleBookingSuccess = (bookingData) => {
+    setBooking(bookingData);
+    setShowBookingConfirmation(true);
+  };
+  
+  const closeBookingConfirmation = () => {
+    setShowBookingConfirmation(false);
   };
 
   if (loading) {
@@ -323,12 +336,8 @@ const ServiceDetail = (props) => {
               </div>
             )}
 
-            {/* CTA Button */}
-            <div class="mt-8 flex justify-center">
-              <button class="bg-[#16325B] hover:bg-blue-800 text-white font-bold py-3 px-8 rounded-lg text-lg transition duration-300 transform hover:-translate-y-1 hover:shadow-lg">
-                Book This Trip
-              </button>
-            </div>
+            {/* Booking Form */}
+            <BookingForm service={service} onSuccess={handleBookingSuccess} />
           </div>
         </div>
 
@@ -505,6 +514,15 @@ const ServiceDetail = (props) => {
             </form>
           </div>
         </div>
+      )}
+      
+      {/* Booking Confirmation Modal */}
+      {showBookingConfirmation && booking && (
+        <BookingConfirmation 
+          booking={booking} 
+          service={service} 
+          onClose={closeBookingConfirmation} 
+        />
       )}
     </div>
   );

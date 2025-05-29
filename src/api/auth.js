@@ -1,14 +1,10 @@
-import { ApiService } from '../services/api.service';
+import { AuthService } from '../services/auth.service';
 import { StorageService } from '../services/storage.service';
 
 export const register = async (username, email, password) => {
     try {
-        const response = await ApiService.api.post('/auth/register', {
-            username,
-            email,
-            password
-        });
-        return response.data;
+        const response = await AuthService.register(username, email, password);
+        return response;
     } catch (error) {
         console.error('Registration error:', error);
         throw error;
@@ -17,18 +13,15 @@ export const register = async (username, email, password) => {
 
 export const login = async (email, password) => {
     try {
-        const response = await ApiService.api.post('/auth/login', {
-            email,
-            password
-        });
+        const response = await AuthService.login(email, password);
 
-        if (response.data.user) {
-            StorageService.setUser(response.data.user);
+        if (response.user) {
+            StorageService.setUser(response.user);
         }
 
-        StorageService.setToken(response.data.token);
+        StorageService.setToken(response.token);
         
-        return response.data;
+        return response;
     } catch (error) {
         console.error('Login error:', error);
         throw error;
