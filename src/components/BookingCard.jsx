@@ -128,12 +128,8 @@ const BookingCard = ({ booking }) => {
             <p className="font-medium">{formatDate(booking.bookingDate)}</p>
           </div>
           <div>
-            <span className="text-sm text-gray-500">People</span>
-            <p className="font-medium">{booking.numberOfPeople}</p>
-          </div>
-          <div>
             <span className="text-sm text-gray-500">Total Amount</span>
-            <p className="font-medium">${booking.totalAmount}</p>
+            <p className="font-medium">${booking.service.price}</p>
           </div>
         </div>
         

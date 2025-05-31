@@ -1,6 +1,6 @@
 import { h } from 'preact';
 import { useState } from 'preact/hooks';
-import { createBooking } from '../api/bookings';
+import { bookService } from '../api/services';
 import { useAuth } from '../context/AuthContext';
 import { route } from 'preact-router';
 
@@ -30,14 +30,14 @@ const BookingForm = ({ service, onSuccess }) => {
         totalAmount: service.price * numberOfPeople
       };
       
-      const response = await createBooking(bookingData);
+      const response = await bookService(service.id, bookingData);
       
       if (onSuccess) {
         onSuccess(response);
       }
     } catch (err) {
-      console.error('Error creating booking:', err);
-      setError('Failed to create booking. Please try again.');
+      console.error('Error booking service:', err);
+      setError('Failed to book service. Please try again.');
     } finally {
       setIsLoading(false);
     }
