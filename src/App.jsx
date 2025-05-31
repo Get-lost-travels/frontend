@@ -14,6 +14,7 @@ import Explore from './pages/Explore';
 import NotFound from './pages/NotFound';
 import ServiceDetail from './pages/ServiceDetail';
 import Profile from './pages/Profile';
+import Bookings from './pages/Bookings';
 
 import { AuthProvider } from './context/AuthContext';
 
@@ -38,6 +39,7 @@ const App = () => {
             <ProtectedRoute path="/explore" component={Explore} />
             <ProtectedRoute path="/service/:id" component={ServiceDetail} />
             <ProtectedRoute path="/profile" component={Profile} />
+            <ProtectedRoute path="/bookings" component={Bookings} />
             <NotFound default />
           </Router>
         </main>

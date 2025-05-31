@@ -1,7 +1,7 @@
 import { h, createContext } from 'preact';
 import { useState, useEffect, useContext } from 'preact/hooks';
 import { StorageService } from '../services/storage.service';
-import { ApiService } from '../services/api.service';
+import { AuthService } from '../services/auth.service';
 
 export const AuthContext = createContext(null);
 
@@ -18,14 +18,12 @@ export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
 
-  // Check authentication status on initial load
   useEffect(() => {
     const checkAuthStatus = async () => {
       try {
-        const token = StorageService.getToken();
         const userData = StorageService.getUser();
         
-        if (token && userData) {
+        if (userData) {
           setUser(userData);
           setIsAuthenticated(true);
         }
@@ -43,14 +41,12 @@ export const AuthProvider = ({ children }) => {
   const login = async (email, password) => {
     setLoading(true);
     try {
-      const response = await ApiService.api.post('/auth/login', {
-        email,
-        password
-      });
+      const response = await AuthService.login(email, password);
 
-      const { user, token } = response.data;
+      const { user, token } = response;
       
-      StorageService.setToken(token);
+      document.cookie = `auth_token=${token}; path=/; SameSite=Lax`;
+      
       StorageService.setUser(user);
       
       setUser(user);
@@ -71,13 +67,9 @@ export const AuthProvider = ({ children }) => {
   const register = async (username, email, password) => {
     setLoading(true);
     try {
-      const response = await ApiService.api.post('/auth/register', {
-        username,
-        email,
-        password
-      });
+      const response = await AuthService.register(username, email, password);
       
-      return { success: true, data: response.data };
+      return { success: true, data: response };
     } catch (error) {
       console.error('Registration failed:', error);
       return { 
@@ -90,6 +82,8 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logout = () => {
+    document.cookie = 'auth_token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT';
+    
     StorageService.clearSession();
     setUser(null);
     setIsAuthenticated(false);

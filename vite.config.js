@@ -13,11 +13,71 @@ export default defineConfig({
     port: 5173,
     strictPort: true,
     proxy: {
-      '/api': {
+      '/auth': {
         target: 'https://localhost:7040',
         changeOrigin: true,
         secure: false,
-        rewrite: (path) => path.replace(/^\/api/, '')
+        configure: (proxy, _options) => {
+          proxy.on('error', (err, _req, _res) => {
+            console.log('auth proxy error', err);
+          });
+          proxy.on('proxyReq', (proxyReq, req, _res) => {
+            console.log('Sending Auth Request:', req.method, req.url);
+            if (req.headers.cookie) {
+              proxyReq.setHeader('cookie', req.headers.cookie);
+            }
+          });
+          proxy.on('proxyRes', (proxyRes, req, _res) => {
+            console.log('Received Auth Response from:', req.url, proxyRes.statusCode);
+            if (proxyRes.headers['set-cookie']) {
+              console.log('Setting auth cookies:', proxyRes.headers['set-cookie']);
+            }
+          });
+        }
+      },
+      '/services': {
+        target: 'https://localhost:7040',
+        changeOrigin: true,
+        secure: false,
+        configure: (proxy, _options) => {
+          proxy.on('error', (err, _req, _res) => {
+            console.log('services proxy error', err);
+          });
+          proxy.on('proxyReq', (proxyReq, req, _res) => {
+            console.log('Sending Services Request:', req.method, req.url);
+            if (req.headers.cookie) {
+              proxyReq.setHeader('cookie', req.headers.cookie);
+            }
+          });
+          proxy.on('proxyRes', (proxyRes, req, _res) => {
+            console.log('Received Services Response from:', req.url, proxyRes.statusCode);
+            if (proxyRes.headers['set-cookie']) {
+              console.log('Setting services cookies:', proxyRes.headers['set-cookie']);
+            }
+          });
+        }
+      },
+      '/bookings': {
+        target: 'https://localhost:7040',
+        changeOrigin: true,
+        secure: false,
+        configure: (proxy, _options) => {
+          proxy.on('error', (err, _req, _res) => {
+            console.log('bookings proxy error', err);
+          });
+          proxy.on('proxyReq', (proxyReq, req, _res) => {
+            console.log('Sending Bookings Request:', req.method, req.url);
+            if (req.headers.cookie) {
+              proxyReq.setHeader('cookie', req.headers.cookie);
+            }
+          });
+          proxy.on('proxyRes', (proxyRes, req, _res) => {
+            console.log('Received Bookings Response from:', req.url, proxyRes.statusCode);
+            if (proxyRes.headers['set-cookie']) {
+              console.log('Setting bookings cookies:', proxyRes.headers['set-cookie']);
+            }
+          });
+        }
       }
     }
   },
