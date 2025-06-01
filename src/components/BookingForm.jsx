@@ -68,7 +68,7 @@ const BookingForm = ({ service, onSuccess }) => {
             </button>
             <input 
               type="number" 
-              className="w-16 text-center border-t border-b border-gray-300 py-2"
+              className="w-16 text-center cursor-pointer border-t border-b border-gray-300 py-2"
               value={numberOfPeople}
               onChange={(e) => {
                 const value = parseInt(e.target.value);
@@ -81,7 +81,7 @@ const BookingForm = ({ service, onSuccess }) => {
             />
             <button 
               type="button" 
-              className="bg-gray-200 rounded-r-md px-3 py-2"
+              className="bg-gray-200 cursor-pointer rounded-r-md px-3 py-2"
               onClick={() => setNumberOfPeople(prev => prev + 1)}
             >
               +
@@ -113,7 +113,7 @@ const BookingForm = ({ service, onSuccess }) => {
           </div>
           <div className="flex justify-between mt-2 text-lg font-bold text-[#16325B]">
             <span>Total:</span>
-            <span>${service.price * numberOfPeople}</span>
+            <span>${(service.price * numberOfPeople).toFixed(2)}</span>
           </div>
         </div>
         

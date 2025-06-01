@@ -68,7 +68,7 @@ const Bookings = () => {
   }
   
   return (
-    <div class="min-h-screen bg-gray-100 py-8">
+    <div class="min-h-screen py-8 w-4/5 mx-auto">
       <div class="container mx-auto px-4">
         <h1 class="text-3xl font-bold text-[#16325B] mb-6">My Bookings</h1>
         
@@ -78,7 +78,7 @@ const Bookings = () => {
             <nav class="-mb-px flex space-x-6">
               <button
                 onClick={() => setActiveTab('all')}
-                class={`py-3 px-1 border-b-2 font-medium text-sm ${
+                class={`py-3 cursor-pointer px-1 border-b-2 font-medium text-sm ${
                   activeTab === 'all'
                     ? 'border-[#16325B] text-[#16325B]'
                     : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
@@ -88,7 +88,7 @@ const Bookings = () => {
               </button>
               <button
                 onClick={() => setActiveTab('active')}
-                class={`py-3 px-1 border-b-2 font-medium text-sm ${
+                class={`py-3 cursor-pointer px-1 border-b-2 font-medium text-sm ${
                   activeTab === 'active'
                     ? 'border-[#16325B] text-[#16325B]'
                     : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
@@ -98,7 +98,7 @@ const Bookings = () => {
               </button>
               <button
                 onClick={() => setActiveTab('completed')}
-                class={`py-3 px-1 border-b-2 font-medium text-sm ${
+                class={`py-3 cursor-pointer px-1 border-b-2 font-medium text-sm ${
                   activeTab === 'completed'
                     ? 'border-[#16325B] text-[#16325B]'
                     : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
@@ -108,7 +108,7 @@ const Bookings = () => {
               </button>
               <button
                 onClick={() => setActiveTab('cancelled')}
-                class={`py-3 px-1 border-b-2 font-medium text-sm ${
+                class={`py-3 cursor-pointer px-1 border-b-2 font-medium text-sm ${
                   activeTab === 'cancelled'
                     ? 'border-[#16325B] text-[#16325B]'
                     : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
