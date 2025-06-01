@@ -12,7 +12,7 @@ const Explore = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [filters, setFilters] = useState({
-    minPrice: '',
+    minPrice: '0',
     maxPrice: '',
     location: '',
     duration: '',
@@ -100,7 +100,7 @@ const Explore = () => {
     const { name, value } = e.target;
     setFilters(prev => ({ ...prev, [name]: value }));
   };
-  
+
   const applyFilters = (e) => {
     e.preventDefault();
     setPagination(prev => ({ ...prev, page: 1 }));
@@ -258,7 +258,7 @@ const Explore = () => {
   };
 
   return (
-    <div class="min-h-screen bg-gray-100">
+    <div class="min-h-screen w-4/5 mx-auto">
       <div class="container mx-auto px-4 py-8">
         <div class="flex items-center justify-between mb-8">
           <h1 class="text-3xl font-bold text-[#16325B]">Explore Destinations</h1>
@@ -297,7 +297,7 @@ const Explore = () => {
                 onClick={() => {
                   setSearchTerm('');
                   setFilters({
-                    minPrice: '',
+                    minPrice: '0',
                     maxPrice: '',
                     location: '',
                     duration: '',
@@ -314,8 +314,8 @@ const Explore = () => {
             </div>
             
             <form onSubmit={applyFilters} class="space-y-0">
-              <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
-                <div class="w-full">
+              <div class="flex flex-col md:flex-row gap-6 mb-4">
+                <div class="w-full md:w-1/3">
                   <label class="block text-sm font-medium mb-2 text-gray-700">Category</label>
                   <select
                     name="categoryId"
@@ -329,55 +329,57 @@ const Explore = () => {
                     ))}
                   </select>
                 </div>
-              </div>
 
-              <div class="flex flex-col md:flex-row gap-4 md:space-x-6 space-y-4 md:space-y-0">
-                <div class="w-full">
-                  <label class="block text-sm font-medium mb-2 text-gray-700">Price Range ($)</label>
-                  <div class="flex items-center gap-2">
-                    <input 
-                      type="number" 
-                      name="minPrice" 
-                      value={filters.minPrice} 
-                      onChange={handleFilterChange}
-                      min="0" 
-                      placeholder="Min" 
-                      class="w-full p-2 rounded border-2 border-gray-200 focus:border-[#227B94] focus:outline-none transition" 
-                    />
-                    <span class="text-gray-500">to</span>
-                    <input 
-                      type="number" 
-                      name="maxPrice" 
-                      value={filters.maxPrice} 
-                      onChange={handleFilterChange}
-                      min="0" 
-                      placeholder="Max" 
-                      class="w-full p-2 rounded border-2 border-gray-200 focus:border-[#227B94] focus:outline-none transition" 
-                    />
+                <div class="w-full md:w-2/3">
+                  <div class="grid grid-cols-2 gap-4">
+                    <div>
+                      <label class="block text-sm font-medium mb-2 text-gray-700">Price Range ($)</label>
+                      <div class="flex items-center gap-2">
+                        <input 
+                          type="number" 
+                          name="minPrice" 
+                          value={filters.minPrice} 
+                          onChange={handleFilterChange}
+                          min="0" 
+                          placeholder="Min" 
+                          class="w-full p-2 rounded border-2 border-gray-200 focus:border-[#227B94] focus:outline-none transition" 
+                        />
+                        <span class="text-gray-500">to</span>
+                        <input 
+                          type="number" 
+                          name="maxPrice" 
+                          value={filters.maxPrice} 
+                          onChange={handleFilterChange}
+                          min="0" 
+                          placeholder="Max" 
+                          class="w-full p-2 rounded border-2 border-gray-200 focus:border-[#227B94] focus:outline-none transition" 
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label class="block text-sm font-medium mb-2 text-gray-700">Duration (days)</label>
+                      <input 
+                        type="number" 
+                        name="duration" 
+                        value={filters.duration} 
+                        onChange={handleFilterChange}
+                        min="1" 
+                        placeholder="Any duration" 
+                        class="w-full p-2 rounded border-2 border-gray-200 focus:border-[#227B94] focus:outline-none transition" 
+                      />
+                    </div>
                   </div>
                 </div>
-                
-                <div class="w-full">
-                  <label class="block text-sm font-medium mb-2 text-gray-700">Duration (days)</label>
-                  <input 
-                    type="number" 
-                    name="duration" 
-                    value={filters.duration} 
-                    onChange={handleFilterChange}
-                    min="1" 
-                    placeholder="Any duration" 
-                    class="w-full p-2 rounded border-2 border-gray-200 focus:border-[#227B94] focus:outline-none transition" 
-                  />
-                </div>
-                
-                <div class="flex items-end">
-                  <button 
-                    type="submit" 
-                    class="bg-[#16325B] hover:bg-blue-800 text-white py-2 px-6 rounded transition duration-300 ease-in-out w-full md:w-auto"
-                  >
-                    Apply Filters
-                  </button>
-                </div>
+              </div>
+
+              <div class="flex justify-end">
+                <button 
+                  type="submit" 
+                  class="bg-[#16325B] hover:bg-blue-800 text-white py-2 px-6 rounded transition duration-300 ease-in-out"
+                >
+                  Apply Filters
+                </button>
               </div>
             </form>
           </div>
@@ -451,7 +453,7 @@ const Explore = () => {
                         onClick={() => {
                           setSearchTerm('');
                           setFilters({
-                            minPrice: '',
+                            minPrice: '0',
                             maxPrice: '',
                             location: '',
                             duration: '',

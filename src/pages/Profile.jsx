@@ -39,21 +39,23 @@ const Profile = () => {
   }
 
   return (
-    <div class="min-h-screen bg-gray-100 py-8">
+    <div class="min-h-screen py-8 w-4/5 mx-auto">
       <div class="container mx-auto px-4">
         {/* Profile Content */}
         <div class="max-w-3xl mx-auto">
           <div class="bg-white rounded-lg shadow-lg overflow-hidden">
             {/* Profile Header */}
             <div class="bg-gradient-to-r from-blue-600 to-blue-700 p-6 text-white">
-              <div class="flex flex-col md:flex-row items-center">
-                <div class="w-24 h-24 bg-white rounded-full flex items-center justify-center mb-4 md:mb-0 md:mr-6 border-4 border-[#FFDC7F]">
-                  <span class="text-[#16325B] text-center text-3xl font-bold">
-                    {user?.username?.charAt(0).toUpperCase() || 'U'}
-                  </span>
+              <div class="flex items-center space-x-6">
+                <div class="flex-shrink-0">
+                  <div class="w-24 h-24 bg-white rounded-full flex items-center justify-center border-4 border-[#FFDC7F]">
+                    <span class="text-[#16325B] text-center text-3xl font-bold">
+                      {user?.username?.charAt(0).toUpperCase() || 'U'}
+                    </span>
+                  </div>
                 </div>
-                <div class="text-center md:text-left">
-                  <h2 class="text-2xl font-bold">{user?.username || 'User'}</h2>
+                <div class="flex-grow">
+                  <h2 class="text-2xl font-bold mb-1">{user?.username || 'User'}</h2>
                   <p class="text-blue-100">{user?.email || 'No email available'}</p>
                 </div>
               </div>
@@ -88,6 +90,12 @@ const Profile = () => {
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
                       </svg>
                       Explore Travel Services
+                    </Link>
+                    <Link href="/bookings" class="flex items-center p-3 bg-gray-50 hover:bg-gray-100 rounded-lg transition duration-200">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-[#227B94] mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                      </svg>
+                      My Bookings
                     </Link>
                     <button 
                       onClick={logout}

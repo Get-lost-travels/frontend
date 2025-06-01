@@ -72,7 +72,7 @@ const BookingConfirmation = ({ booking, service, onClose }) => {
           <h2 className="text-2xl font-bold text-[#16325B]">Booking Confirmed</h2>
           <button 
             onClick={onClose}
-            className="text-gray-400 hover:text-gray-600"
+            className="text-gray-400 hover:text-gray-600 cursor-pointer"
           >
             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
@@ -114,11 +114,8 @@ const BookingConfirmation = ({ booking, service, onClose }) => {
             <div className="text-gray-600">Status:</div>
             <div className="font-medium capitalize">{booking.status}</div>
             
-            <div className="text-gray-600">People:</div>
-            <div className="font-medium">{booking.numberOfPeople}</div>
-            
             <div className="text-gray-600">Total Amount:</div>
-            <div className="font-medium">${booking.totalAmount}</div>
+            <div className="font-medium">${booking.service.price}</div>
           </div>
         </div>
         
@@ -134,31 +131,8 @@ const BookingConfirmation = ({ booking, service, onClose }) => {
         
         <div className="flex flex-col sm:flex-row gap-3 mt-6">
           <button 
-            onClick={handleDownloadTicket} 
-            className="flex-1 bg-[#16325B] hover:bg-blue-800 text-white font-medium py-2 px-4 rounded-lg flex justify-center items-center"
-            disabled={downloadingTicket || booking.status !== 'confirmed'}
-          >
-            {downloadingTicket ? (
-              <>
-                <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                </svg>
-                Downloading...
-              </>
-            ) : (
-              <>
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 10v6m0 0l-3-3m3 3l3-3M3 17V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
-                </svg>
-                Download E-Ticket
-              </>
-            )}
-          </button>
-          
-          <button 
             onClick={handleDownloadInvoice}
-            className="flex-1 bg-white border border-gray-300 hover:bg-gray-50 text-gray-700 font-medium py-2 px-4 rounded-lg flex justify-center items-center"
+            className="flex-1 bg-[#16325B] cursor-pointer hover:bg-blue-800 text-white font-medium py-2 px-4 rounded-lg flex justify-center items-center"
             disabled={downloadingInvoice}
           >
             {downloadingInvoice ? (
