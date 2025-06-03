@@ -15,6 +15,8 @@ import NotFound from './pages/NotFound';
 import ServiceDetail from './pages/ServiceDetail';
 import Profile from './pages/Profile';
 import Bookings from './pages/Bookings';
+import AgencyOffers from './pages/AgencyOffers';
+import AgencyBookings from './pages/AgencyBookings';
 
 import { AuthProvider } from './context/AuthContext';
 
@@ -40,6 +42,8 @@ const App = () => {
             <ProtectedRoute path="/service/:id" component={ServiceDetail} />
             <ProtectedRoute path="/profile" component={Profile} />
             <ProtectedRoute path="/bookings" component={Bookings} />
+            <ProtectedRoute path="/agency-offers" component={AgencyOffers} />
+            <ProtectedRoute path="/agency-bookings" component={AgencyBookings} />
             <NotFound default />
           </Router>
         </main>
@@ -47,5 +51,5 @@ const App = () => {
     </AuthProvider>
   );
 };
-
-export default App; 
+<null></null>
+export default App;

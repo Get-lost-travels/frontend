@@ -51,7 +51,9 @@ export const getMyServices = async () => {
 };
 
 export const addServiceMedia = async (id, mediaData) => {
-    const response = await ApiService.api.post(`/services/${id}/media`, mediaData);
+    // If mediaData is FormData, explicitly set Content-Type to undefined
+    const config = mediaData instanceof window.FormData ? { headers: { 'Content-Type': undefined } } : undefined;
+    const response = await ApiService.api.post(`/services/${id}/media`, mediaData, config);
     return response.data;
 };
 
@@ -155,27 +157,4 @@ export const fetchServices = async (params = {}) => {
     if (params.pageSize) query.append('pageSize', params.pageSize);
     const response = await ApiService.api.get(`/services?${query.toString()}`);
     return response.data;
-};
-
-export const bookService = async (serviceId, bookingData) => {
-    try {
-        console.log(`🎫 Booking service ${serviceId} with data:`, bookingData);
-        const response = await ApiService.api.post(`/services/${serviceId}/book`, bookingData);
-        console.log('✅ SERVICE BOOKED successfully:', response.data);
-        return response.data;
-    } catch (error) {
-        console.error('❌ Failed to book service:', error);
-        
-        if (error.response?.status === 403) {
-            console.log('🚨 403 FORBIDDEN - Authentication required or wrong role');
-            console.log('🔍 Make sure user is logged in as "customer"');
-        } else if (error.response?.status === 400) {
-            console.log('🚨 400 BAD REQUEST - Service may not be available');
-            console.log('🔍 Check if service has available slots');
-        } else if (error.response?.status === 404) {
-            console.log('🚨 404 NOT FOUND - Service may not exist');
-        }
-        
-        throw error;
-    }
 }; 

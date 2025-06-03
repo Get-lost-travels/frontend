@@ -7,7 +7,7 @@ import '../components/navbar.css';
 const PATHS_WHERE_NAVBAR_IS_HIDDEN = ['/', '/#/', '#/'];
 
 const Navbar = (props) => {
-  const { isAuthenticated,  logout } = useAuth();
+  const { isAuthenticated, user, logout } = useAuth();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const currentPath = props.url || getCurrentUrl();
 
@@ -41,11 +41,25 @@ const Navbar = (props) => {
       visibleWhen: 'authenticated',
       icon: '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>'
     },
-    {
+    // Show for customers only
+    user && user.role === 'customer' && {
       path: '/bookings',
       label: 'My Bookings',
       visibleWhen: 'authenticated',
       icon: '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>'
+    },
+    // Show for agencies only
+    user && user.role === 'agency' && {
+      path: '/agency-bookings',
+      label: 'Agency Bookings',
+      visibleWhen: 'authenticated',
+      icon: '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2a4 4 0 014-4h3m4 0a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>'
+    },
+    user && user.role === 'agency' && {
+      path: '/agency-offers',
+      label: 'Create Offer',
+      visibleWhen: 'authenticated',
+      icon: '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" /></svg>'
     },
     { 
       path: '/', 
@@ -54,7 +68,7 @@ const Navbar = (props) => {
       icon: '<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" /></svg>',
       action: 'logout'
     }
-  ];
+  ].filter(Boolean);
 
   const renderLinks = () => {
     return links.map(link => {
@@ -146,4 +160,4 @@ const Navbar = (props) => {
   );
 };
 
-export default Navbar; 
+export default Navbar;
